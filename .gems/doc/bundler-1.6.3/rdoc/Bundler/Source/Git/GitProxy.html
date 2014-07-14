@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Bundler::Source::Git::GitProxy - bundler-1.6.3 Documentation</title>
+
+<link type="text/css" media="screen" href="../../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../../index.html">Home</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/bundler/source/git/git_proxy.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="../../../Object.html">Object</a>
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-allow-3F">#allow?</a>
+    
+    <li ><a href="#method-i-allowed_in_path">#allowed_in_path</a>
+    
+    <li ><a href="#method-i-branch">#branch</a>
+    
+    <li ><a href="#method-i-checkout">#checkout</a>
+    
+    <li ><a href="#method-i-contains-3F">#contains?</a>
+    
+    <li ><a href="#method-i-copy_to">#copy_to</a>
+    
+    <li ><a href="#method-i-git">#git</a>
+    
+    <li ><a href="#method-i-git_null">#git_null</a>
+    
+    <li ><a href="#method-i-git_retry">#git_retry</a>
+    
+    <li ><a href="#method-i-has_revision_cached-3F">#has_revision_cached?</a>
+    
+    <li ><a href="#method-i-in_path">#in_path</a>
+    
+    <li ><a href="#method-i-revision">#revision</a>
+    
+    <li ><a href="#method-i-uri_escaped">#uri_escaped</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle.html">bundle</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-config.html">bundle-config</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-config_txt.html">bundle-config</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-exec.html">bundle-exec</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-exec_txt.html">bundle-exec</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-install.html">bundle-install</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-install_txt.html">bundle-install</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-package.html">bundle-package</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-package_txt.html">bundle-package</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-platform.html">bundle-platform</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-platform_txt.html">bundle-platform</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-update.html">bundle-update</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle-update_txt.html">bundle-update</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/bundle_txt.html">bundle</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/gemfile_5.html">gemfile.5</a>
+  
+    <li class="file"><a href="../../../lib/bundler/man/gemfile_5_txt.html">gemfile.5</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/Executable.html">Executable</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/Executable_standalone.html">Executable.standalone</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/Gemfile_tt.html">Gemfile.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/LICENSE_txt_tt.html">LICENSE.txt.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/README_md_tt.html">README.md.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/Rakefile_tt.html">Rakefile.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/bin/newgem_tt.html">newgem.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/ext/newgem/extconf_rb_tt.html">extconf.rb.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/ext/newgem/newgem_c_tt.html">newgem.c.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/ext/newgem/newgem_h_tt.html">newgem.h.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/gitignore_tt.html">gitignore.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/lib/newgem_rb_tt.html">newgem.rb.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/lib/newgem/version_rb_tt.html">version.rb.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/newgem_gemspec_tt.html">newgem.gemspec.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/rspec_tt.html">rspec.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/spec/newgem_spec_rb_tt.html">newgem_spec.rb.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/spec/spec_helper_rb_tt.html">spec_helper.rb.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/test/minitest_helper_rb_tt.html">minitest_helper.rb.tt</a>
+  
+    <li class="file"><a href="../../../lib/bundler/templates/newgem/test/test_newgem_rb_tt.html">test_newgem.rb.tt</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../../Bundler.html">Bundler</a>
+  
+    <li><a href="../../../Bundler/BundlerError.html">Bundler::BundlerError</a>
+  
+    <li><a href="../../../Bundler/CLI.html">Bundler::CLI</a>
+  
+    <li><a href="../../../Bundler/CLI/Binstubs.html">Bundler::CLI::Binstubs</a>
+  
+    <li><a href="../../../Bundler/CLI/Cache.html">Bundler::CLI::Cache</a>
+  
+    <li><a href="../../../Bundler/CLI/Check.html">Bundler::CLI::Check</a>
+  
+    <li><a href="../../../Bundler/CLI/Clean.html">Bundler::CLI::Clean</a>
+  
+    <li><a href="../../../Bundler/CLI/Common.html">Bundler::CLI::Common</a>
+  
+    <li><a href="../../../Bundler/CLI/Config.html">Bundler::CLI::Config</a>
+  
+    <li><a href="../../../Bundler/CLI/Console.html">Bundler::CLI::Console</a>
+  
+    <li><a href="../../../Bundler/CLI/Exec.html">Bundler::CLI::Exec</a>
+  
+    <li><a href="../../../Bundler/CLI/Gem.html">Bundler::CLI::Gem</a>
+  
+    <li><a href="../../../Bundler/CLI/Init.html">Bundler::CLI::Init</a>
+  
+    <li><a href="../../../Bundler/CLI/Inject.html">Bundler::CLI::Inject</a>
+  
+    <li><a href="../../../Bundler/CLI/Install.html">Bundler::CLI::Install</a>
+  
+    <li><a href="../../../Bundler/CLI/Open.html">Bundler::CLI::Open</a>
+  
+    <li><a href="../../../Bundler/CLI/Outdated.html">Bundler::CLI::Outdated</a>
+  
+    <li><a href="../../../Bundler/CLI/Package.html">Bundler::CLI::Package</a>
+  
+    <li><a href="../../../Bundler/CLI/Platform.html">Bundler::CLI::Platform</a>
+  
+    <li><a href="../../../Bundler/CLI/Show.html">Bundler::CLI::Show</a>
+  
+    <li><a href="../../../Bundler/CLI/Update.html">Bundler::CLI::Update</a>
+  
+    <li><a href="../../../Bundler/CLI/Viz.html">Bundler::CLI::Viz</a>
+  
+    <li><a href="../../../Bundler/CurrentRuby.html">Bundler::CurrentRuby</a>
+  
+    <li><a href="../../../Bundler/CyclicDependencyError.html">Bundler::CyclicDependencyError</a>
+  
+    <li><a href="../../../Bundler/Definition.html">Bundler::Definition</a>
+  
+    <li><a href="../../../Bundler/DepProxy.html">Bundler::DepProxy</a>
+  
+    <li><a href="../../../Bundler/Dependency.html">Bundler::Dependency</a>
+  
+    <li><a href="../../../Bundler/Deployment.html">Bundler::Deployment</a>
+  
+    <li><a href="../../../Bundler/Deprecate.html">Bundler::Deprecate</a>
+  
+    <li><a href="../../../Bundler/DeprecatedError.html">Bundler::DeprecatedError</a>
+  
+    <li><a href="../../../Bundler/Dsl.html">Bundler::Dsl</a>
+  
+    <li><a href="../../../Bundler/EndpointSpecification.html">Bundler::EndpointSpecification</a>
+  
+    <li><a href="../../../Bundler/Env.html">Bundler::Env</a>
+  
+    <li><a href="../../../Bundler/Environment.html">Bundler::Environment</a>
+  
+    <li><a href="../../../Bundler/Fetcher.html">Bundler::Fetcher</a>
+  
+    <li><a href="../../../Bundler/Fetcher/AuthenticationRequiredError.html">Bundler::Fetcher::AuthenticationRequiredError</a>
+  
+    <li><a href="../../../Bundler/Fetcher/BadAuthenticationError.html">Bundler::Fetcher::BadAuthenticationError</a>
+  
+    <li><a href="../../../Bundler/Fetcher/CertificateFailureError.html">Bundler::Fetcher::CertificateFailureError</a>
+  
+    <li><a href="../../../Bundler/Fetcher/FallbackError.html">Bundler::Fetcher::FallbackError</a>
+  
+    <li><a href="../../../Bundler/Fetcher/SSLError.html">Bundler::Fetcher::SSLError</a>
+  
+    <li><a href="../../../Bundler/GemHelper.html">Bundler::GemHelper</a>
+  
+    <li><a href="../../../Bundler/GemHelper/Rake.html">Bundler::GemHelper::Rake</a>
+  
+    <li><a href="../../../Bundler/GemHelpers.html">Bundler::GemHelpers</a>
+  
+    <li><a href="../../../Bundler/GemInstaller.html">Bundler::GemInstaller</a>
+  
+    <li><a href="../../../Bundler/GemNotFound.html">Bundler::GemNotFound</a>
+  
+    <li><a href="../../../Bundler/GemfileError.html">Bundler::GemfileError</a>
+  
+    <li><a href="../../../Bundler/GemfileLockNotFound.html">Bundler::GemfileLockNotFound</a>
+  
+    <li><a href="../../../Bundler/GemfileNotFound.html">Bundler::GemfileNotFound</a>
+  
+    <li><a href="../../../Bundler/GemspecError.html">Bundler::GemspecError</a>
+  
+    <li><a href="../../../Bundler/GitError.html">Bundler::GitError</a>
+  
+    <li><a href="../../../Bundler/Graph.html">Bundler::Graph</a>
+  
+    <li><a href="../../../Bundler/Graph/GraphVizClient.html">Bundler::Graph::GraphVizClient</a>
+  
+    <li><a href="../../../Bundler/HTTPError.html">Bundler::HTTPError</a>
+  
+    <li><a href="../../../Bundler/Index.html">Bundler::Index</a>
+  
+    <li><a href="../../../Bundler/Injector.html">Bundler::Injector</a>
+  
+    <li><a href="../../../Bundler/InstallError.html">Bundler::InstallError</a>
+  
+    <li><a href="../../../Bundler/InstallHookError.html">Bundler::InstallHookError</a>
+  
+    <li><a href="../../../Bundler/Installer.html">Bundler::Installer</a>
+  
+    <li><a href="../../../Bundler/InvalidOption.html">Bundler::InvalidOption</a>
+  
+    <li><a href="../../../Bundler/LazySpecification.html">Bundler::LazySpecification</a>
+  
+    <li><a href="../../../Bundler/LockfileError.html">Bundler::LockfileError</a>
+  
+    <li><a href="../../../Bundler/LockfileParser.html">Bundler::LockfileParser</a>
+  
+    <li><a href="../../../Bundler/MarshalError.html">Bundler::MarshalError</a>
+  
+    <li><a href="../../../Bundler/MatchPlatform.html">Bundler::MatchPlatform</a>
+  
+    <li><a href="../../../Bundler/ParallelWorkers.html">Bundler::ParallelWorkers</a>
+  
+    <li><a href="../../../Bundler/ParallelWorkers/ThreadWorker.html">Bundler::ParallelWorkers::ThreadWorker</a>
+  
+    <li><a href="../../../Bundler/ParallelWorkers/UnixWorker.html">Bundler::ParallelWorkers::UnixWorker</a>
+  
+    <li><a href="../../../Bundler/ParallelWorkers/UnixWorker/JobHandler.html">Bundler::ParallelWorkers::UnixWorker::JobHandler</a>
+  
+    <li><a href="../../../Bundler/ParallelWorkers/Worker.html">Bundler::ParallelWorkers::Worker</a>
+  
+    <li><a href="../../../Bundler/ParallelWorkers/Worker/WrappedException.html">Bundler::ParallelWorkers::Worker::WrappedException</a>
+  
+    <li><a href="../../../Bundler/PathError.html">Bundler::PathError</a>
+  
+    <li><a href="../../../Bundler/ProductionError.html">Bundler::ProductionError</a>
+  
+    <li><a href="../../../Bundler/Psych.html">Bundler::Psych</a>
+  
+    <li><a href="../../../Bundler/RemoteSpecification.html">Bundler::RemoteSpecification</a>
+  
+    <li><a href="../../../Bundler/Resolver.html">Bundler::Resolver</a>
+  
+    <li><a href="../../../Bundler/Resolver/SpecGroup.html">Bundler::Resolver::SpecGroup</a>
+  
+    <li><a href="../../../Bundler/Resolver/State.html">Bundler::Resolver::State</a>
+  
+    <li><a href="../../../Bundler/Retry.html">Bundler::Retry</a>
+  
+    <li><a href="../../../Bundler/RubyDsl.html">Bundler::RubyDsl</a>
+  
+    <li><a href="../../../Bundler/RubyVersion.html">Bundler::RubyVersion</a>
+  
+    <li><a href="../../../Bundler/RubyVersionMismatch.html">Bundler::RubyVersionMismatch</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration.html">Bundler::RubygemsIntegration</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/AlmostModern.html">Bundler::RubygemsIntegration::AlmostModern</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Ancient.html">Bundler::RubygemsIntegration::Ancient</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Future.html">Bundler::RubygemsIntegration::Future</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Gem.html">Bundler::RubygemsIntegration::Gem</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Legacy.html">Bundler::RubygemsIntegration::Legacy</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Legacy/Gem/SourceIndex.html">Bundler::RubygemsIntegration::Legacy::Gem::SourceIndex</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Modern.html">Bundler::RubygemsIntegration::Modern</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/MoreModern.html">Bundler::RubygemsIntegration::MoreModern</a>
+  
+    <li><a href="../../../Bundler/RubygemsIntegration/Transitional.html">Bundler::RubygemsIntegration::Transitional</a>
+  
+    <li><a href="../../../Bundler/Runtime.html">Bundler::Runtime</a>
+  
+    <li><a href="../../../Bundler/SecurityError.html">Bundler::SecurityError</a>
+  
+    <li><a href="../../../Bundler/Settings.html">Bundler::Settings</a>
+  
+    <li><a href="../../../Bundler/SharedHelpers.html">Bundler::SharedHelpers</a>
+  
+    <li><a href="../../../Bundler/SimilarityDetector.html">Bundler::SimilarityDetector</a>
+  
+    <li><a href="../../../Bundler/Source.html">Bundler::Source</a>
+  
+    <li><a href="../../../Bundler/Source/Git.html">Bundler::Source::Git</a>
+  
+    <li><a href="../../../Bundler/Source/Git/GitCommandError.html">Bundler::Source::Git::GitCommandError</a>
+  
+    <li><a href="../../../Bundler/Source/Git/GitNotAllowedError.html">Bundler::Source::Git::GitNotAllowedError</a>
+  
+    <li><a href="../../../Bundler/Source/Git/GitNotInstalledError.html">Bundler::Source::Git::GitNotInstalledError</a>
+  
+    <li><a href="../../../Bundler/Source/Git/GitProxy.html">Bundler::Source::Git::GitProxy</a>
+  
+    <li><a href="../../../Bundler/Source/Path.html">Bundler::Source::Path</a>
+  
+    <li><a href="../../../Bundler/Source/Path/Installer.html">Bundler::Source::Path::Installer</a>
+  
+    <li><a href="../../../Bundler/Source/Rubygems.html">Bundler::Source::Rubygems</a>
+  
+    <li><a href="../../../Bundler/SpecSet.html">Bundler::SpecSet</a>
+  
+    <li><a href="../../../Bundler/SystemRubyVersion.html">Bundler::SystemRubyVersion</a>
+  
+    <li><a href="../../../Bundler/UI.html">Bundler::UI</a>
+  
+    <li><a href="../../../Bundler/UI/RGProxy.html">Bundler::UI::RGProxy</a>
+  
+    <li><a href="../../../Bundler/UI/Shell.html">Bundler::UI::Shell</a>
+  
+    <li><a href="../../../Bundler/UI/Silent.html">Bundler::UI::Silent</a>
+  
+    <li><a href="../../../Bundler/VersionConflict.html">Bundler::VersionConflict</a>
+  
+    <li><a href="../../../Capistrano.html">Capistrano</a>
+  
+    <li><a href="../../../Gem.html">Gem</a>
+  
+    <li><a href="../../../Gem/Dependency.html">Gem::Dependency</a>
+  
+    <li><a href="../../../Gem/Platform.html">Gem::Platform</a>
+  
+    <li><a href="../../../Gem/Requirement.html">Gem::Requirement</a>
+  
+    <li><a href="../../../Gem/Specification.html">Gem::Specification</a>
+  
+    <li><a href="../../../Object.html">Object</a>
+  
+    <li><a href="../../../Rake.html">Rake</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Bundler::Source::Git::GitProxy</h1>
+
+  <div id="description" class="description">
+    
+<p>The <a href="GitProxy.html">GitProxy</a> is responsible to interact with
+git repositories. All actions required by the <a href="../Git.html">Git</a>
+source is encapsulated in this object.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-path" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">path</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-ref" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">ref</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-revision" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">revision</span><span
+            class="attribute-access-type">[W]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-uri" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">uri</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(path, uri, ref, revision = nil, git = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">uri</span>, <span class="ruby-identifier">ref</span>, <span class="ruby-identifier">revision</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">git</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@path</span>     = <span class="ruby-identifier">path</span>
+  <span class="ruby-ivar">@uri</span>      = <span class="ruby-identifier">uri</span>
+  <span class="ruby-ivar">@ref</span>      = <span class="ruby-identifier">ref</span>
+  <span class="ruby-ivar">@revision</span> = <span class="ruby-identifier">revision</span>
+  <span class="ruby-ivar">@git</span>      = <span class="ruby-identifier">git</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">GitNotInstalledError</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">allow?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-constant">Bundler</span>.<span class="ruby-identifier">git_present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-branch" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">branch</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="branch-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">branch</span>
+  <span class="ruby-ivar">@branch</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">allowed_in_path</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">git</span>(<span class="ruby-string">&quot;branch&quot;</span>) <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\* (.*)$/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">strip</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- branch-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- branch-method -->
+
+    
+      <div id="method-i-checkout" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">checkout</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="checkout-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">exist?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_revision_cached?</span>
+    <span class="ruby-constant">Bundler</span>.<span class="ruby-identifier">ui</span>.<span class="ruby-identifier">confirm</span> <span class="ruby-node">&quot;Updating #{uri}&quot;</span>
+    <span class="ruby-identifier">in_path</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">git_retry</span> <span class="ruby-node">%Qfetch --force --quiet --tags #{uri_escaped} &quot;refs/heads/*:refs/heads/*&quot;|</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Bundler</span>.<span class="ruby-identifier">ui</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Fetching #{uri}&quot;</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">dirname</span>)
+    <span class="ruby-identifier">git_retry</span> <span class="ruby-node">%Qclone #{uri_escaped} &quot;#{path}&quot; --bare --no-hardlinks --quiet|</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- checkout-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- checkout-method -->
+
+    
+      <div id="method-i-contains-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">contains?</span><span
+            class="method-args">(commit)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="contains-3F-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">contains?</span>(<span class="ruby-identifier">commit</span>)
+  <span class="ruby-identifier">allowed_in_path</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">git_null</span>(<span class="ruby-node">&quot;branch --contains #{commit}&quot;</span>)
+    <span class="ruby-identifier">$?</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\* (.*)$/</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- contains-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- contains-3F-method -->
+
+    
+      <div id="method-i-copy_to" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">copy_to</span><span
+            class="method-args">(destination, submodules=false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="copy_to-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">copy_to</span>(<span class="ruby-identifier">destination</span>, <span class="ruby-identifier">submodules</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;.git&quot;</span>))
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">destination</span>.<span class="ruby-identifier">dirname</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span>(<span class="ruby-identifier">destination</span>)
+    <span class="ruby-identifier">git_retry</span> <span class="ruby-node">%Qclone --no-checkout --quiet &quot;#{path}&quot; &quot;#{destination}&quot;|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">chmod</span>((<span class="ruby-value">0777</span> <span class="ruby-operator">&amp;</span> <span class="ruby-operator">~</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">umask</span>), <span class="ruby-identifier">destination</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">SharedHelpers</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">destination</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">git_retry</span> <span class="ruby-node">%Qfetch --force --quiet --tags &quot;#{path}&quot;|</span>
+    <span class="ruby-identifier">git</span> <span class="ruby-node">&quot;reset --hard #{@revision}&quot;</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">submodules</span>
+      <span class="ruby-identifier">git_retry</span> <span class="ruby-string">&quot;submodule update --init --recursive&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- copy_to-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- copy_to-method -->
+
+    
+      <div id="method-i-revision" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">revision</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="revision-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">revision</span>
+  <span class="ruby-ivar">@revision</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">allowed_in_path</span> { <span class="ruby-identifier">git</span>(<span class="ruby-node">&quot;rev-parse #{ref}&quot;</span>).<span class="ruby-identifier">strip</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- revision-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- revision-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-allow-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">allow?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="allow-3F-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">allow?</span>
+  <span class="ruby-ivar">@git</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@git</span>.<span class="ruby-identifier">allow_git_ops?</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- allow-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- allow-3F-method -->
+
+    
+      <div id="method-i-allowed_in_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">allowed_in_path</span><span
+            class="method-args">() { || ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="allowed_in_path-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">allowed_in_path</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">in_path</span> { <span class="ruby-keyword">yield</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">allow?</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">GitError</span>, <span class="ruby-node">&quot;The git source #{uri} is not yet checked out. Please run `bundle install` before trying to start your application&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- allowed_in_path-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- allowed_in_path-method -->
+
+    
+      <div id="method-i-git" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">git</span><span
+            class="method-args">(command, check_errors=true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="git-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">git</span>(<span class="ruby-identifier">command</span>, <span class="ruby-identifier">check_errors</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">GitNotAllowedError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">command</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">allow?</span>
+  <span class="ruby-identifier">out</span> = <span class="ruby-constant">SharedHelpers</span>.<span class="ruby-identifier">with_clean_git_env</span> { <span class="ruby-node">%x{git #{command}}</span> }
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">GitCommandError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">command</span>, <span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">check_errors</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">$?</span>.<span class="ruby-identifier">success?</span>
+  <span class="ruby-identifier">out</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- git-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- git-method -->
+
+    
+      <div id="method-i-git_null" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">git_null</span><span
+            class="method-args">(command)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>TODO: Do not rely on /dev/null. Given that open3 is not cross platform
+until Ruby 1.9.3, the best solution is to pipe to /dev/null if it exists.
+If it doesn&#39;t, everything will work fine, but the user will get the
+$stderr messages as well.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="git_null-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">git_null</span>(<span class="ruby-identifier">command</span>)
+  <span class="ruby-identifier">git</span>(<span class="ruby-node">&quot;#{command} 2&gt;#{Bundler::NULL}&quot;</span>, <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- git_null-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- git_null-method -->
+
+    
+      <div id="method-i-git_retry" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">git_retry</span><span
+            class="method-args">(command)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="git_retry-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">git_retry</span>(<span class="ruby-identifier">command</span>)
+  <span class="ruby-constant">Bundler</span><span class="ruby-operator">::</span><span class="ruby-constant">Retry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;git #{command}&quot;</span>, <span class="ruby-constant">GitNotAllowedError</span>).<span class="ruby-identifier">attempts</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">git</span>(<span class="ruby-identifier">command</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- git_retry-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- git_retry-method -->
+
+    
+      <div id="method-i-has_revision_cached-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_revision_cached?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="has_revision_cached-3F-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_revision_cached?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@revision</span>
+  <span class="ruby-identifier">in_path</span> { <span class="ruby-identifier">git</span>(<span class="ruby-node">&quot;cat-file -e #{@revision}&quot;</span>) }
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">GitError</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_revision_cached-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_revision_cached-3F-method -->
+
+    
+      <div id="method-i-in_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">in_path</span><span
+            class="method-args">(&blk)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="in_path-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">in_path</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+  <span class="ruby-identifier">checkout</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">exist?</span>
+  <span class="ruby-constant">SharedHelpers</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- in_path-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- in_path-method -->
+
+    
+      <div id="method-i-uri_escaped" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">uri_escaped</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Escape the URI for git commands</p>
+          
+          
+
+          
+          <div class="method-source-code" id="uri_escaped-source">
+            <pre><span class="ruby-comment"># File lib/bundler/source/git/git_proxy.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">uri_escaped</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Bundler</span><span class="ruby-operator">::</span><span class="ruby-constant">WINDOWS</span>
+    <span class="ruby-comment"># Windows quoting requires double quotes only, with double quotes</span>
+    <span class="ruby-comment"># inside the string escaped by being doubled.</span>
+    <span class="ruby-string">&#39;&quot;&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;&quot;&#39;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-string">&#39;&quot;&quot;&#39;</span>} <span class="ruby-operator">+</span> <span class="ruby-string">&#39;&quot;&#39;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Bash requires single quoted strings, with the single quotes escaped</span>
+    <span class="ruby-comment"># by ending the string, escaping the quote, and restarting the string.</span>
+    <span class="ruby-string">&quot;&#39;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&quot;&#39;&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;&#39;\\&#39;&#39;&quot;</span>} <span class="ruby-operator">+</span> <span class="ruby-string">&quot;&#39;&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- uri_escaped-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- uri_escaped-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

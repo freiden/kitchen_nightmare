@@ -1,0 +1,15 @@
+.idea
+.yardoc
+*.gem
+*.html
+*.rbc
+*.swp
+^coverage
+doc
+tmp
+Gemfile.lock
+gemfiles/*.lock
+.bundle
+bin
+vendor
+.rspec

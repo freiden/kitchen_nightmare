@@ -1,0 +1,13 @@
+# Dear Rubocop, we're going to agree to disagree on the following:
+
+LineLength:
+  Max: 200
+
+MethodLength:
+  Max: 25
+
+ClassLength:
+  Max: 200
+
+UnusedMethodArgument:
+  Enabled: false
