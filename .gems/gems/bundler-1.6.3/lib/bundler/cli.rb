@@ -371,5 +371,3 @@ module Bundler
 
   end
 end
-
-Gem.load_plugins rescue nil

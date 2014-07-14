@@ -1,13 +1,10 @@
 # -*- encoding: utf-8 -*-
-# stub: dep-selector-libgecode 1.0.1 ruby lib
-# stub: ext/libgecode3/extconf.rb
 
 Gem::Specification.new do |s|
   s.name = "dep-selector-libgecode"
   s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib"]
   s.authors = ["danielsdeleo"]
   s.date = "2014-05-22"
   s.description = "Installs a vendored copy of Gecode suitable for use with dep-selector"
@@ -16,10 +13,9 @@ Gem::Specification.new do |s|
   s.files = ["ext/libgecode3/extconf.rb"]
   s.homepage = ""
   s.licenses = ["MIT", "Apache 2.0"]
-  s.rubygems_version = "2.3.0"
+  s.require_paths = ["lib"]
+  s.rubygems_version = "2.0.14"
   s.summary = "Installs a vendored copy of Gecode suitable for use with dep-selector"
-
-  s.installed_by_version = "2.3.0" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

@@ -30,8 +30,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = ./.gem.20140628-50498-1m9a0tc
-sitelibdir = ./.gem.20140628-50498-1m9a0tc
+sitearchdir = ./.gem.20140714-25942-15x48xd
+sitelibdir = ./.gem.20140714-25942-15x48xd
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -79,12 +79,12 @@ debugflags = -ggdb3
 warnflags = -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wshorten-64-to-32 -Wimplicit-function-declaration
 CCDLFLAGS = -fno-common
 CFLAGS   = $(CCDLFLAGS)  -O3 -Wno-error=shorten-64-to-32  -pipe $(ARCH_FLAG)
-INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir) -I/Users/cfreiden/Devs/devs_chef/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/include
+INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir) -I/Users/cfreiden/Devs/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/include
 DEFS     = 
 CPPFLAGS =  -I/usr/local/var/rbenv/versions/2.0.0-p481/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
 CXXFLAGS = $(CCDLFLAGS) $(cxxflags) $(ARCH_FLAG)
 ldflags  = -L. -L/usr/local/var/rbenv/versions/2.0.0-p481/lib 
-dldflags = -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress -Wl,-rpath,/Users/cfreiden/Devs/devs_chef/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/lib 
+dldflags = -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress -Wl,-rpath,/Users/cfreiden/Devs/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/lib 
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
 LDSHARED = $(CC) -dynamic -bundle
@@ -120,8 +120,8 @@ TOUCH = exit >
 
 preload = 
 
-libpath = . $(libdir) /Users/cfreiden/Devs/devs_chef/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/lib
-LIBPATH =  -L. -L$(libdir) -L/Users/cfreiden/Devs/devs_chef/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/lib
+libpath = . $(libdir) /Users/cfreiden/Devs/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/lib
+LIBPATH =  -L. -L$(libdir) -L/Users/cfreiden/Devs/server_deployement/kitchen_nightmare/.gems/gems/dep-selector-libgecode-1.0.1/lib/dep-selector-libgecode/vendored-gecode/lib
 DEFFILE = 
 
 CLEANFILES = mkmf.log
