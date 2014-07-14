@@ -4,7 +4,7 @@
     "recipe[ohai]",
     "recipe[runit]",
     "recipe[build-essential]",
-    "recipe[ruby_build]",
+    /*"recipe[ruby_build]",*/
     "recipe[kn_deployer]"
   ],
   "default_attributes": {

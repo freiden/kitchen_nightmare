@@ -1,4 +1,5 @@
 /cookbooks/
 tags
 .gems
+.tags*
 
