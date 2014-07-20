@@ -1,10 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'chef'
+require 'json'
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-# Custom
+# Custom for Virtualbox Guest Additions
 class HackyGuestAdditionsInstaller < VagrantVbguest::Installers::Ubuntu
   def install(opts=nil, &block)
     super
@@ -17,6 +20,11 @@ EOF
     communicate.sudo(super_garbage_hack)
   end
 end
+# Custom
+
+# Custom Chef Node management
+Chef::Config.from_file(File.join(File.dirname(__FILE__), '.chef', 'knife.rb'))
+vagrant_json = JSON.parse(Pathname(__FILE__).dirname.join('nodes', (ENV['NODE'] || 'kn_deployer.json')).read)
 # Custom
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -114,6 +122,25 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   # You may also specify custom JSON attributes:
   #   chef.json = { mysql_password: "foo" }
   # end
+
+  config.vm.provision "chef_solo" do |chef|
+    # Chef configuration
+    chef.cookbooks_path = Chef::Config[:cookbook_path]
+    chef.roles_path = Chef::Config[:role_path]
+    chef.data_bags_path = Chef::Config[:data_bag_path]
+    chef.environments_path = Chef::Config[:environment_path]
+    #chef.environment = ENV['ENVIRONMENT'] || 'development'
+
+    # Chef node run_list
+    chef.run_list = vagrant_json.delete('run_list')
+
+    # chef.add_recipe "mysql"
+    # chef.add_role "web"
+
+    # You may also specify custom JSON attributes:
+    # chef.json = { mysql_password: "foo" }
+    chef.json = vagrant_json
+  end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
