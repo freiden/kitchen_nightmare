@@ -197,9 +197,10 @@ Chef project used to configure and update ubuntu server.
   # Custom
   ```
   - And a vagrant plugin should be installed by using the following command:
-    ```bash
-    vagrant plugin install <plugin_name>
-    ```
+
+      ```bash
+      vagrant plugin install <plugin_name>
+      ```
     - vagrant-vbguest
 
 - If project must managed by Vagrant some more settings should be done:
@@ -208,12 +209,37 @@ Chef project used to configure and update ubuntu server.
     - vagrant-omnibus
   - Configuring Chef project settings in the Vagrantfile by adding:
     - This block before the Vagrant configuration block.
-    ```ruby
-    # Custom Chef Node management
-    Chef::Config.from_file(File.join(File.dirname(__FILE__), '.chef', 'knife.rb'))
-    vagrant_json = JSON.parse(Pathname(__FILE__).dirname.join('nodes', (ENV['NODE'] || 'kn_deployer.json')).read)
-    # Custom
-    ```
+
+      ```ruby
+      # Custom Chef Node management
+      Chef::Config.from_file(File.join(File.dirname(__FILE__), '.chef', 'knife.rb'))
+      vagrant_json = JSON.parse(Pathname(__FILE__).dirname.join('nodes', (ENV['NODE'] || 'kn_deployer.json')).read)
+      # Custom
+      ```
+
+    - Uncomment and fill chef_solo block inside the Vagrant one (following the commented lines could be useful :D):
+
+      ```ruby
+      config.vm.provision "chef_solo" do |chef|
+        # Chef configuration
+        chef.cookbooks_path = Chef::Config[:cookbook_path]
+        chef.roles_path = Chef::Config[:role_path]
+        chef.data_bags_path = Chef::Config[:data_bag_path]
+        chef.environments_path = Chef::Config[:environment_path]
+
+        # Chef node run_list
+        chef.run_list = vagrant_json.delete('run_list')
+
+        chef.json = vagrant_json
+      end
+      ```
+    - Because of the new setting some requirements must be added (at the top of the file of course):
+
+      ```ruby
+      require 'chef'
+      require 'json'
+      ```
+
 
 ### Berkfile
 
