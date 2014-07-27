@@ -131,7 +131,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.roles_path = Chef::Config[:role_path]
     chef.data_bags_path = Chef::Config[:data_bag_path]
     chef.environments_path = Chef::Config[:environment_path]
-    #chef.environment = ENV['ENVIRONMENT'] || 'development'
+    chef.environment = ENV['ENVIRONMENT'] || 'development'
 
     # Chef node run_list
     chef.run_list = vagrant_json.delete('run_list')

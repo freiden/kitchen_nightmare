@@ -1,0 +1,32 @@
+/*
+  Environnement file information based on the one initialy defined leopard in his Chef book http://chef.leopard.in.ua/html/
+  Structure details:
+    • name:               A unique name of environment
+    • description:        A description of the environment
+    • cheftype:           This should always be set to environment
+    • jsonclass:          This should always be set to Chef::Environment
+    • defaultattributes:  A set of attributes that should be applied to all nodes, assuming the node does not already have a value for the attribute.
+                          This is useful for setting global defaults that can then be overridden for specific nodes. This attribute is optional.
+    • overrideattributes: A set of attributes that should be applied to all nodes, even if the node already has a value for an attribute.
+                          This is useful for ensuring that certain attributes always have specific values. This attribute is optional.
+
+
+  {
+    "name": "development",
+    "description": "development environment",
+    "chef_type": "environment",
+    "json_class": "Chef::Environment",
+    "default_attributes": {
+      "apache": {
+        "timeout": 120
+      }
+    }
+  }
+*/
+
+{
+  "name": "development",
+  "description": "development environment",
+  "chef_type": "environment",
+  "json_class": "Chef::Environment"
+}
